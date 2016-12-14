@@ -16,32 +16,22 @@ export function activate(context: vscode.ExtensionContext) {
     // The commandId parameter must match the command field in package.json
 
     let finder = new TestFinder();
-    let disposable = vscode.commands.registerCommand('testcaferunner.run', () => {
-        // The code you place here will be executed every time your command is executed
-
-        // Display a message box to the user
-        vscode.window.showInformationMessage('Hello World!');
-
-        // var editor = vscode.window.activeTextEditor;
-        // if (!editor) {
-        //     return; // No open text editor
-        // }
-
-        // var selection = editor.selection;
-        // var text = editor.document.getText(selection);
-
-        // // Display a message box to the user
-        // vscode.window.showInformationMessage('Selected characters: ' + text.length);
-
-
-            finder.updateCurrentTest();
-
-        // Add to a list of disposables which are disposed when this extension is deactivated.
-        
-    });
-
+    context.subscriptions.push(
+        vscode.commands.registerCommand('testcaferunner.runIE', () => {
+            finder.runCurrentTest("ie");
+        })
+    );
+    context.subscriptions.push(
+        vscode.commands.registerCommand('testcaferunner.runFirefox', () => {
+            finder.runCurrentTest("firefox");
+        })
+    );
+    context.subscriptions.push(
+        vscode.commands.registerCommand('testcaferunner.runChrome', () => {
+            finder.runCurrentTest("chrome");
+        })
+    );
     context.subscriptions.push(finder);
-    context.subscriptions.push(disposable);
 }
 
 // this method is called when your extension is deactivated
@@ -49,16 +39,15 @@ export function deactivate() {
 }
 
 class TestFinder {
-    private _statusBarItem: vscode.StatusBarItem;
-    public updateCurrentTest() {
+    public runCurrentTest(browser: string) {
         let editor = vscode.window.activeTextEditor;
         if(!editor)
             return;
         let doc = editor.document;
-        // if (doc.languageId !== "javascript")
-        //     return;
+        if (doc.languageId !== "javascript")
+            return;
         var test = this.findTest(editor.document, editor.selection);
-        this.runTest(test || "Test not found");
+        this.runTest(test, browser);
     }
     private findTest(document: vscode.TextDocument, selection: vscode.Selection): string {
         var text = document.getText(new vscode.Range(0, 0, selection.end.line, selection.end.character));
@@ -77,15 +66,28 @@ class TestFinder {
         
         return tests[tests.length - 1];
     }
-    public runTest(name: string) {
-        if (!this._statusBarItem)
-            this._statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left);
-        this._statusBarItem.text = `TestCafe: ${name}`
-        this._statusBarItem.show();
+    public runTest(name: string, browser: string) {
+        if(!name) {
+             vscode.window.showErrorMessage(`TestCafe test is not found`);
+             return;
+        }
+        //vscode.window.showInformationMessage(`Running test: ${name}`);
+        vscode.commands.executeCommand("vscode.startDebug", {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch current test with TestCafe",
+            "program": "${workspaceRoot}/node_modules/testcafe/bin/testcafe.js",
+            "args": [
+                browser,
+                "${file}",
+                "--test",
+                name.substr(1, name.length - 2)
+            ],
+            "cwd": "${workspaceRoot}"
+        });
     }
 
     dispose() {
-        if (this._statusBarItem)
-            this._statusBarItem.dispose();
+        
     }
 }

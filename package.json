@@ -11,14 +11,41 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:testcaferunner.run"
+        "onLanguage:javascript"
     ],
     "main": "./out/src/extension",
     "contributes": {
         "commands": [{
-            "command": "testcaferunner.run",
-            "title": "TestCafe: Run Test"
-        }]
+            "command": "testcaferunner.runIE",
+            "title": "TestCafe: Run Test (IE)"
+        },
+        {
+            "command": "testcaferunner.runFirefox",
+            "title": "TestCafe: Run Test (Firefox)"
+        },
+        {
+            "command": "testcaferunner.runChrome",
+            "title": "TestCafe: Run Test (Chrome)"
+        }],
+        "menus": {
+            "editor/context": [
+                {
+                    "when": "resourceLangId == javascript",
+                    "command": "testcaferunner.runIE",
+                    "group": "testcaferunner"
+                },
+                {
+                    "when": "resourceLangId == javascript",
+                    "command": "testcaferunner.runFirefox",
+                    "group": "testcaferunner"
+                },
+                {
+                    "when": "resourceLangId == javascript",
+                    "command": "testcaferunner.runChrome",
+                    "group": "testcaferunner"
+                }
+            ]
+        }
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
