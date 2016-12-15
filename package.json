@@ -2,7 +2,7 @@
     "name": "testcafe-test-runner",
     "displayName": "TestCafe Test Runner",
     "description": "",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "romanresh",
     "engines": {
         "vscode": "^1.5.0"
@@ -26,22 +26,31 @@
         {
             "command": "testcaferunner.runChrome",
             "title": "TestCafe: Run Test (Chrome)"
+        },
+        {
+            "command": "testcaferunner.repeatRun",
+            "title": "TestCafe: Repeat Previous Test Run"
         }],
         "menus": {
             "editor/context": [
                 {
-                    "when": "resourceLangId == javascript",
+                    "when": "resourceLangId == javascript && testcaferunner.readyForUX",
                     "command": "testcaferunner.runIE",
                     "group": "testcaferunner"
                 },
                 {
-                    "when": "resourceLangId == javascript",
+                    "when": "resourceLangId == javascript && testcaferunner.readyForUX",
                     "command": "testcaferunner.runFirefox",
                     "group": "testcaferunner"
                 },
                 {
-                    "when": "resourceLangId == javascript",
+                    "when": "resourceLangId == javascript && testcaferunner.readyForUX",
                     "command": "testcaferunner.runChrome",
+                    "group": "testcaferunner"
+                },
+                {
+                    "when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.canRerun",
+                    "command": "testcaferunner.repeatRun",
                     "group": "testcaferunner"
                 }
             ]
