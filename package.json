@@ -1,14 +1,17 @@
 {
     "name": "testcafe-test-runner",
     "displayName": "TestCafe Test Runner",
-    "description": "",
-    "version": "0.0.2",
+    "description": "Allows to run TestCafe tests directly from VS Code via context menu or built-in commands",
+    "version": "0.0.3",
     "publisher": "romanresh",
     "engines": {
         "vscode": "^1.5.0"
     },
     "categories": [
         "Other"
+    ],
+    "keywords": [
+        "TestCafe", "Test", "Runner"
     ],
     "activationEvents": [
         "onLanguage:javascript"
