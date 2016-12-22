@@ -19,16 +19,28 @@
     "main": "./out/src/extension",
     "contributes": {
         "commands": [{
-            "command": "testcaferunner.runIE",
-            "title": "TestCafe: Run Test (IE)"
+            "command": "testcaferunner.runTestsInIE",
+            "title": "TestCafe: Run Test(s) (IE)"
         },
         {
-            "command": "testcaferunner.runFirefox",
-            "title": "TestCafe: Run Test (Firefox)"
+            "command": "testcaferunner.runTestsInFirefox",
+            "title": "TestCafe: Run Test(s) (Firefox)"
         },
         {
-            "command": "testcaferunner.runChrome",
-            "title": "TestCafe: Run Test (Chrome)"
+            "command": "testcaferunner.runTestsInChrome",
+            "title": "TestCafe: Run Test(s) (Chrome)"
+        },
+        {
+            "command": "testcaferunner.runTestFileInIE",
+            "title": "TestCafe: Run Test(s) (IE)"
+        },
+        {
+            "command": "testcaferunner.runTestFileInFirefox",
+            "title": "TestCafe: Run Test(s) (Firefox)"
+        },
+        {
+            "command": "testcaferunner.runTestFileInChrome",
+            "title": "TestCafe: Run Test(s) (Chrome)"
         },
         {
             "command": "testcaferunner.repeatRun",
@@ -37,18 +49,40 @@
         "menus": {
             "editor/context": [
                 {
+                    "when": "editorLangId == javascript && testcaferunner.readyForUX",
+                    "command": "testcaferunner.runTestsInIE",
+                    "group": "testcaferunner"
+                },
+                {
+                    "when": "editorLangId == javascript && testcaferunner.readyForUX",
+                    "command": "testcaferunner.runTestsInFirefox",
+                    "group": "testcaferunner"
+                },
+                {
+                    "when": "editorLangId == javascript && testcaferunner.readyForUX",
+                    "command": "testcaferunner.runTestsInChrome",
+                    "group": "testcaferunner"
+                },
+                {
+                    "when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.canRerun",
+                    "command": "testcaferunner.repeatRun",
+                    "group": "testcaferunner"
+                }
+            ],
+            "explorer/context": [
+                {
                     "when": "resourceLangId == javascript && testcaferunner.readyForUX",
-                    "command": "testcaferunner.runIE",
+                    "command": "testcaferunner.runTestFileInIE",
                     "group": "testcaferunner"
                 },
                 {
                     "when": "resourceLangId == javascript && testcaferunner.readyForUX",
-                    "command": "testcaferunner.runFirefox",
+                    "command": "testcaferunner.runTestFileInFirefox",
                     "group": "testcaferunner"
                 },
                 {
                     "when": "resourceLangId == javascript && testcaferunner.readyForUX",
-                    "command": "testcaferunner.runChrome",
+                    "command": "testcaferunner.runTestFileInChrome",
                     "group": "testcaferunner"
                 },
                 {
