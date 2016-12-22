@@ -6,6 +6,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [0.0.3]
 - Run all tests in a file (via file context menu)
 - Run all tests in a fixture
+- Fix run test via right click on the 'test' function.
 
 ## [0.0.2]
 - New command: TestCafe: Repeat Previous Test Run

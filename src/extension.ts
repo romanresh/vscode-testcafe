@@ -69,7 +69,7 @@ class TestCafeTestController {
 
         var document = editor.document;
         var selection = editor.selection;
-        var textBeforeSelection = document.getText(new vscode.Range(0, 0, selection.end.line, selection.end.character));
+        var textBeforeSelection = document.getText(new vscode.Range(0, 0, selection.end.line + 1, 0));
 
         var [type, name] = this.findTestOrFixtureName(textBeforeSelection);
 
