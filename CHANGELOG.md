@@ -3,6 +3,10 @@ All notable changes to the "testcafe-test-runner" extension will be documented i
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.0.3]
+- Run all tests in a file (via file context menu)
+- Run all tests in a fixture
+
 ## [0.0.2]
 - New command: TestCafe: Repeat Previous Test Run
 - Fixed error which occurs when extensions is not activated, but menus're already available
