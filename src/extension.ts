@@ -144,7 +144,7 @@ class TestCafeTestController {
             "type": "node",
             "request": "launch",
             "name": "Launch current test with TestCafe",
-            "program": "${workspaceRoot}/node_modules/testcafe/bin/testcafe.js",
+            "program": "${workspaceRoot}/node_modules/testcafe/lib/cli/index.js",
             "args": args,
             "cwd": "${workspaceRoot}"
         });
