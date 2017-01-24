@@ -3,6 +3,10 @@ All notable changes to the "testcafe-test-runner" extension will be documented i
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.0.5]
+ - Automatic detection of installed browsers
+ - Run all tests in a folder
+
 ## [0.0.4]
 - Fix breakpoints missing in testcafe `^0.12.0-alpha1+`
 

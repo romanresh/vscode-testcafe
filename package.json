@@ -2,7 +2,7 @@
     "name": "testcafe-test-runner",
     "displayName": "TestCafe Test Runner",
     "description": "Allows to run TestCafe tests directly from VS Code via context menu or built-in commands",
-    "version": "0.0.3",
+    "version": "0.0.5",
     "publisher": "romanresh",
     "icon": "images/icon.png",
     "engines": {
@@ -24,59 +24,59 @@
         "commands": [
             {
                 "command": "testcaferunner.runTestsInIE",
-                "title": "TestCafe: Run Test(s) (IE)"
+                "title": "TestCafe: Run Test(s) in IE"
             },
             {
                 "command": "testcaferunner.runTestsInFirefox",
-                "title": "TestCafe: Run Test(s) (Firefox)"
+                "title": "TestCafe: Run Test(s) in Firefox"
             },
             {
                 "command": "testcaferunner.runTestsInChrome",
-                "title": "TestCafe: Run Test(s) (Chrome)"
+                "title": "TestCafe: Run Test(s) in Chrome"
             },
             {
                 "command": "testcaferunner.runTestsInChromium",
-                "title": "TestCafe: Run Test(s) (Chromium)"
+                "title": "TestCafe: Run Test(s) in Chromium"
             },
             {
                 "command": "testcaferunner.runTestsInOpera",
-                "title": "TestCafe: Run Test(s) (Opera)"
+                "title": "TestCafe: Run Test(s) in Opera"
             },
             {
                 "command": "testcaferunner.runTestsInSafari",
-                "title": "TestCafe: Run Test(s) (Safari)"
+                "title": "TestCafe: Run Test(s) in Safari"
             },
             {
                 "command": "testcaferunner.runTestsInEdge",
-                "title": "TestCafe: Run Test(s) (Edge)"
+                "title": "TestCafe: Run Test(s) in Edge"
             },
             {
                 "command": "testcaferunner.runTestFileInIE",
-                "title": "TestCafe: Run Test(s) (IE)"
+                "title": "TestCafe: Run Test(s) in IE"
             },
             {
                 "command": "testcaferunner.runTestFileInFirefox",
-                "title": "TestCafe: Run Test(s) (Firefox)"
+                "title": "TestCafe: Run Test(s) in Firefox"
             },
             {
                 "command": "testcaferunner.runTestFileInChrome",
-                "title": "TestCafe: Run Test(s) (Chrome)"
+                "title": "TestCafe: Run Test(s) in Chrome"
             },
             {
                 "command": "testcaferunner.runTestFileInChromium",
-                "title": "TestCafe: Run Test(s) (Chromium)"
+                "title": "TestCafe: Run Test(s) in Chromium"
             },
             {
                 "command": "testcaferunner.runTestFileInOpera",
-                "title": "TestCafe: Run Test(s) (Opera)"
+                "title": "TestCafe: Run Test(s) in Opera"
             },
             {
                 "command": "testcaferunner.runTestFileInSafari",
-                "title": "TestCafe: Run Test(s) (Safari)"
+                "title": "TestCafe: Run Test(s) in Safari"
             },
             {
                 "command": "testcaferunner.runTestFileInEdge",
-                "title": "TestCafe: Run Test(s) (Edge)"
+                "title": "TestCafe: Run Test(s) in Edge"
             },
             {
                 "command": "testcaferunner.repeatRun",

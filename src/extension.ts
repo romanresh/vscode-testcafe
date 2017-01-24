@@ -240,7 +240,7 @@ class TestCafeTestController {
         vscode.commands.executeCommand("vscode.startDebug", {
             "type": "node",
             "request": "launch",
-            "name": "Launch current test with TestCafe",
+            "name": "Launch current test(s) with TestCafe",
             "program": "${workspaceRoot}/node_modules/testcafe/lib/cli/index.js",
             "args": args,
             "cwd": "${workspaceRoot}"
