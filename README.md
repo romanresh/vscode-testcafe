@@ -1,21 +1,78 @@
 # TestCafe Test Runner for Visual Studio Code
-Allows to run TestCafe tests directly from VS Code via context menu or built-in commands. Test results will be shown in the `Debug Console` panel. The tests are running in the Debug mode, so breakpoints will work as expected.
 
-![Demo](images/screenshot.png)
+Welcome to the **TestCafe Test Runner** extension for Visual Studio Code! This extension allows you to do the following right from VS Code:
 
-Built-in commands:
-* TestCafe: Run Test(s) (Chrome)
-* TestCafe: Run Test(s) (IE)
-* TestCafe: Run Test(s) (Firefox)
-* TestCafe: Repeat Previous Test Run
+* Run a particular test, fixture, all tests in a file or directory via the context menu or built-in commands
+* Automatically detect browsers installed on the local machine
+* Repeat last test run
+* Debug tests
+* View test results in the `Debug Console` panel
 
-Current Limitations
------
+##Requirements
 
-1. TestCafe should be installed as a local package
-2. A workspace folder should contain the `node_modules` directory
-3. Only .js test files are supported
+[TestCafe](https://github.com/DevExpress/testcafe) should be installed in your project as a local package. To install it, use the `npm install testcafe` command.
 
-Sources
------
-[GitHub](https://github.com/romanresh/vscode-testcafe)
+##How to install extension
+
+Install the **TestCafe Test Runner** extension from VS Code Marketplace as described in the VS Code [documentation](https://code.visualstudio.com/Docs/editor/extension-gallery).
+
+##Features
+
+###Activation
+
+While activating, the extension detects browsers installed on your machine. For each browser, the extension creates a corresponding command and an item in the context menu.
+
+![Editor context menu](./images/context-menu.png)
+
+###Running a particular test
+
+To run a particular test, invoke the context menu when the cursor is placed within the test body and select `TestCafe: Run Test(s) in...` for the required browser.
+
+###Running a particular test fixture
+
+To run all tests in a particular test fixture, invoke the context menu when the cursor is placed within this fixture outside of a test body and select `TestCafe: Run Test(s) in...` for the required browser.
+
+###Running all tests in a file
+
+To run all tests in the current file, invoke the context menu for this file in the Explorer panel and select `TestCafe: Run Test(s) in...` for the required browser.
+
+![Explorer context menu](./images/explorer-menu.png)
+
+###Running all tests in a folder
+
+To run all test files in a folder, invoke the context menu for this folder in the Explorer panel and select `TestCafe: Run Test(s) in...` for the required browser.
+
+###Rerunning previous tests
+
+If you need to run the same set of tests you ran previously, invoke the context menu and select `Repeat Previous Test Run`. Alternatively, you can use the `Ctrl+Alt+R` shortcut.
+This command is available after the first test run.
+
+###Test Debugging
+
+To debug your test, place the `debugger` statement in test code and run this test via one of the commands. Test execution will be stopped once it reaches the `debugger` statement and you will be able to continue step-by-step.
+
+![Explorer context menu](./images/debugging.png)
+
+###Test Result 
+
+You can view a test run report in the `Debug console`.
+
+![Failing test report](./images/test-report.png)
+
+
+###Update browser list
+
+When you install a new browser or delete an existing one, update the extension's browser list. To do this, use the `TestCafe: Refresh Browser List` command or the `Ctrl+Alt+U` shortcut.
+
+##Commands and shortcuts
+
+To run built-in commands, press `Ctrl+Shift+P` and type the command name:
+
+* *TestCafe: Run Test(s) in IE, TestCafe: Run Test(s) in Chrome,  ...* - runs a test or fixture at the cursor position in the specified browser.
+* *TestCafe: Repeat Previous Test Run* (`Ctrl+Alt+R`) - reruns a set of tests that was run previously.
+* *TestCafe: Refresh Browser List* (`Ctrl+Alt+U`) - refreshes the list of installed browsers.
+
+##Sources
+
+* [TestCafe Test Runner](https://github.com/romanresh/vscode-testcafe)
+* [TestCafe](https://github.com/DevExpress/testcafe)
