@@ -8,9 +8,12 @@ Welcome to the **TestCafe Test Runner** extension for Visual Studio Code! This e
 * Debug tests
 * View test results in the `Debug Console` panel
 
+![Demo](./images/demo.gif)
+
 ##Requirements
 
 [TestCafe](https://github.com/DevExpress/testcafe) should be installed in your project as a local package. To install it, use the `npm install testcafe` command.
+For Mac OS, add `TestCafe` to dependencies in your `package.json` file. Your project should contain TestCafe modules in `node_modules\testcafe\...`.
 
 ##How to install extension
 
@@ -44,7 +47,7 @@ To run all test files in a folder, invoke the context menu for this folder in th
 
 ###Rerunning previous tests
 
-If you need to run the same set of tests you ran previously, invoke the context menu and select `Repeat Previous Test Run`. Alternatively, you can use the `Ctrl+Alt+R` shortcut.
+If you need to run the same set of tests you ran previously, invoke the context menu and select `Repeat Previous Test Run`. Alternatively, you can use the `Ctrl+Alt+P` shortcut.
 This command is available after the first test run.
 
 ###Test Debugging
@@ -69,7 +72,7 @@ When you install a new browser or delete an existing one, update the extension's
 To run built-in commands, press `Ctrl+Shift+P` and type the command name:
 
 * *TestCafe: Run Test(s) in IE, TestCafe: Run Test(s) in Chrome,  ...* - runs a test or fixture at the cursor position in the specified browser.
-* *TestCafe: Repeat Previous Test Run* (`Ctrl+Alt+R`) - reruns a set of tests that was run previously.
+* *TestCafe: Repeat Previous Test Run* (`Ctrl+Alt+P`) - reruns a set of tests that was run previously.
 * *TestCafe: Refresh Browser List* (`Ctrl+Alt+U`) - refreshes the list of installed browsers.
 
 ##Sources
