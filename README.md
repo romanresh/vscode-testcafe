@@ -1,6 +1,6 @@
 # TestCafe Test Runner for Visual Studio Code
 
-Welcome to the **TestCafe Test Runner** extension for Visual Studio Code! This extension allows you to do the following right from VS Code:
+[TestCafe](https://devexpress.github.io/testcafe/) is a pure Node.js end-to-end framework for testing web apps. This extension allows you to run TestCafe tests directly from VS Code.
 
 * Run a particular test, fixture, all tests in a file or directory via the context menu or built-in commands
 * Automatically detect browsers installed on the local machine
