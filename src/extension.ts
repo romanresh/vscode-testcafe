@@ -232,6 +232,11 @@ class TestCafeTestController {
 
         var args = [browser, filePath];
 
+        var customArguments = vscode.workspace.getConfiguration("testcafeTestRunner").get("customArguments");
+        if(typeof(customArguments) === "string") {
+            args = args.concat((<string>customArguments).split(" "));
+        }
+
         if (type !== "file") {
             args.push("--" + type);
             args.push(name);
