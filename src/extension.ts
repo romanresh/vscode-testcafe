@@ -7,7 +7,7 @@ const CLEANUP_TEST_OR_FIXTURE_NAME_RE = /(^\(?\s*(\'|"|`))|((\'|"|`)\s*\)?$)/g;
 const BROWSER_ALIASES = ['ie', 'firefox', 'chrome', 'chromium', 'opera', 'safari', 'edge'];
 
 var browserTools = require ('testcafe-browser-tools');
-let controller = null;
+let controller: TestCafeTestController = null;
 
 function registerRunTestsCommands (context:vscode.ExtensionContext){
     context.subscriptions.push(
@@ -148,7 +148,7 @@ class TestCafeTestController {
 
         let doc = editor.document;
 
-        if (doc.languageId !== "javascript")
+        if (doc.languageId !== "javascript" && doc.languageId !== "typescript")
             return;
 
         var document = editor.document;
