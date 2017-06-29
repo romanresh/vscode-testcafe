@@ -1,10 +1,12 @@
 'use strict';
 
 import * as vscode from 'vscode';
+import * as fs from 'fs';
 
 const TEST_OR_FIXTURE_RE = /(^|;|\s+|\/\/|\/\*)fixture\s*(\(.+?\)|`.+?`)|(^|;|\s+|\/\/|\/\*)test\s*\(\s*(.+?)\s*,/gm;
 const CLEANUP_TEST_OR_FIXTURE_NAME_RE = /(^\(?\s*(\'|"|`))|((\'|"|`)\s*\)?$)/g;
 const BROWSER_ALIASES = ['ie', 'firefox', 'chrome', 'chromium', 'opera', 'safari', 'edge'];
+const TESTCAFE_PATH = "/node_modules/testcafe/lib/cli/index.js";
 
 var browserTools = require ('testcafe-browser-tools');
 let controller: TestCafeTestController = null;
@@ -242,11 +244,17 @@ class TestCafeTestController {
             args.push(name);
         }
 
+        var testCafePath = vscode.workspace.rootPath + TESTCAFE_PATH;
+        if(!fs.existsSync(testCafePath)) {
+            vscode.window.showErrorMessage(`TestCafe package is not found. Checked path: ${testCafePath}. Install testcafe package to your working directory.`);
+            return;
+        }
+
         vscode.commands.executeCommand("vscode.startDebug", {
             "type": "node",
             "request": "launch",
             "name": "Launch current test(s) with TestCafe",
-            "program": "${workspaceRoot}/node_modules/testcafe/lib/cli/index.js",
+            "program": "${workspaceRoot}" + TESTCAFE_PATH,
             "args": args,
             "cwd": "${workspaceRoot}"
         });
