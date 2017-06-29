@@ -246,7 +246,7 @@ class TestCafeTestController {
 
         var testCafePath = vscode.workspace.rootPath + TESTCAFE_PATH;
         if(!fs.existsSync(testCafePath)) {
-            vscode.window.showErrorMessage(`TestCafe package is not found. Checked path: ${testCafePath}. Install testcafe package to your working directory.`);
+            vscode.window.showErrorMessage(`TestCafe package is not found. Checked path: ${testCafePath}. Install the testcafe package to your working directory.`);
             return;
         }
 

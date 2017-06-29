@@ -3,6 +3,10 @@ All notable changes to the "testcafe-test-runner" extension will be documented i
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.1.0]
+ - Added TypeScript files support
+ - Fixed the error message if testcafe is not found in the working directory
+
 ## [1.0.2]
  - Added the 'testcafeTestRunner.customArguments' configuration key. See the whole list of available arguments in the [TestCafe documentation](https://devexpress.github.io/testcafe/documentation/using-testcafe/command-line-interface.html#options).
 
