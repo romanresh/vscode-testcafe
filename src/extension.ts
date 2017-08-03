@@ -251,7 +251,7 @@ class TestCafeTestController {
         }
 
         vscode.commands.executeCommand("vscode.startDebug", {
-            "type": "node",
+            "type": "node2",
             "request": "launch",
             "name": "Launch current test(s) with TestCafe",
             "program": "${workspaceRoot}" + TESTCAFE_PATH,
