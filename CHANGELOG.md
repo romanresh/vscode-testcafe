@@ -6,7 +6,6 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [1.2.0]
  - Use the 'inspector' protocol instead of 'legacy'
  - Use the Terminal tab instead of the Output (because of https://github.com/Microsoft/vscode/issues/19750 and https://github.com/romanresh/vscode-testcafe/issues/10)
- - Use testcafe API to find a test under selection
 
 ## [1.1.0]
  - Added TypeScript files support
