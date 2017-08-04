@@ -9,12 +9,6 @@ const BROWSER_ALIASES = ['ie', 'firefox', 'chrome', 'chromium', 'opera', 'safari
 const TESTCAFE_PATH = "/node_modules/testcafe/lib/cli/index.js";
 
 var browserTools = require ('testcafe-browser-tools');
-var tc = require ('testcafe');
-
-const COMPUTED_NAME_RE = /\<computed name\>\(line: \d+\)/;
-
-var getTestList = tc.embeddingUtils.getTestList;
-
 let controller: TestCafeTestController = null;
 
 function registerRunTestsCommands (context:vscode.ExtensionContext){
@@ -148,31 +142,6 @@ class TestCafeTestController {
     lastType:string;
     lastName:string;
 
-    private isInsideToken (tokenStructure, cursorPosition){
-        return cursorPosition > tokenStructure.start && cursorPosition < tokenStructure.end;
-    }
-
-    private findTestOrFixture(fileStructure, cursorPosition):string[] {
-        var fixtureStructure = null;
-        var testStructure = null;
-
-        for(var i = 0; i < fileStructure.length; i++){
-            fixtureStructure = fileStructure[i];
-            
-            if(this.isInsideToken(fixtureStructure, cursorPosition))
-                return ['fixture', fixtureStructure.name];
-
-            for(var j = 0; j < fixtureStructure.tests.length; j++){
-                testStructure = fixtureStructure.tests[j];
-
-                if(this.isInsideToken(testStructure, cursorPosition))
-                    return ['test', testStructure.name];
-            }
-        }
-
-        return ['', ''];
-    }
-
     public runTests(browser:string) {
         let editor = vscode.window.activeTextEditor;
 
@@ -190,20 +159,12 @@ class TestCafeTestController {
         if(!selection || !selection.active)
             return;
 
-        getTestList( document.fileName)
-            .then(structure => {
-                if(structure.length){
-                    var cursorPosition = document.getText(new vscode.Range(0, 0, selection.active.line, selection.active.character)).length;
-                    var [type, name] = this.findTestOrFixture(structure, cursorPosition);
+        var cursorPosition = document.getText(new vscode.Range(0, 0, selection.active.line, selection.active.character)).length;
+        var textBeforeSelection = document.getText(new vscode.Range(0, 0, selection.end.line + 1, 0));
 
-                    if(COMPUTED_NAME_RE.test(name))
-                        vscode.window.showErrorMessage(`The detected ${type} name is a computed string template. This template requires the ${type} to be compiled first. Please specify the ${type} name as a string.`);    
-                    else
-                        this.startTestRun(browser, document.fileName, type, name);
-                }
-                else
-                    vscode.window.showErrorMessage(`No tests found. Position the cursor inside a test() function or fixture.`);
-            });
+        var [type, name] = this.findTestOrFixtureName(textBeforeSelection, cursorPosition);
+
+        this.startTestRun(browser, document.fileName, type, name);
     }
 
     public repeatLastRun() {
@@ -213,6 +174,51 @@ class TestCafeTestController {
         }
 
         this.startTestRun(this.lastBrowser, this.lastFile, this.lastType, this.lastName);
+    }
+
+    private cropMatchString(matchString){
+        matchString = matchString.trim().replace(/;|\/\/|\/\*/, '');
+        
+        return matchString.trim();
+    }
+
+    private isTest(matchString){    
+        return this.cropMatchString(matchString).indexOf('test') === 0;
+    }
+
+    private findTestOrFixtureName(text, cursorPosition):string[] {
+        var match = TEST_OR_FIXTURE_RE.exec(text);
+        var matches = [];
+
+        while (match !== null) {
+                var test = this.isTest(match[0]);
+                var name = test ? match[4] : match[2];
+                var realIndex = match.index + match[0].length - this.cropMatchString(match[0]).length;
+
+                matches.push({
+                    type: test ? 'test' : 'fixture',
+                    name: name.replace(CLEANUP_TEST_OR_FIXTURE_NAME_RE, ''),
+                    index: realIndex
+                });
+
+            match = TEST_OR_FIXTURE_RE.exec(text);
+        }
+
+        var lastOne = null;
+
+        if (matches.length){
+            for(var i = matches.length - 1; i >= 0; i--){
+                if(cursorPosition >=  matches[i].index){
+                    lastOne = matches[i];
+                    break;
+                }
+            }
+        }
+
+        if (lastOne)
+            return [lastOne.type, lastOne.name];
+
+        return ['', ''];
     }
 
     public startTestRun(browser:string, filePath:string, type:string, name:string = "") {

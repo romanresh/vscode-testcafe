@@ -331,8 +331,7 @@
         "test": "node ./node_modules/vscode/bin/test"
     },
     "dependencies": {
-        "testcafe": "0.17.0-alpha6",
-        "testcafe-browser-tools": "1.2.4"
+        "testcafe-browser-tools": "1.1.7"
     },
     "devDependencies": {
         "typescript": "^2.0.3",
