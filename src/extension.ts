@@ -256,7 +256,12 @@ class TestCafeTestController {
             "name": "Launch current test(s) with TestCafe",
             "program": "${workspaceRoot}" + TESTCAFE_PATH,
             "args": args,
-            "cwd": "${workspaceRoot}"
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "runtimeArgs": [
+                "--no-deprecation"
+            ]
         });
         vscode.commands.executeCommand('setContext', 'testcaferunner.canRerun', true);
     }
