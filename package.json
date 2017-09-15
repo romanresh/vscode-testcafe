@@ -2,7 +2,7 @@
     "name": "testcafe-test-runner",
     "displayName": "TestCafe Test Runner",
     "description": "Allows to run TestCafe tests directly from VS Code via context menu or built-in commands",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "publisher": "romanresh",
     "icon": "images/icon.png",
     "engines": {
@@ -34,6 +34,14 @@
                     ],
                     "default": null,
                     "description": "Specifies custom arguments of the TestCafe Command Line Interface"
+                },
+                "testcafeTestRunner.workspaceRoot": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "default": null,
+                    "description": "Specifies a path to add to the workspaceRoot to find the testcafe module, useful if you have your tests in a nested npm project"
                 }
             }
         },
