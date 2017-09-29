@@ -34,6 +34,14 @@
                     ],
                     "default": null,
                     "description": "Specifies custom arguments of the TestCafe Command Line Interface"
+                },
+                "testcafeTestRunner.workspaceRoot": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "default": null,
+                    "description": "Specifies a path to add to the workspaceRoot to find the testcafe module, useful if you have your tests in a nested npm project"
                 }
             }
         },

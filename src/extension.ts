@@ -220,6 +220,14 @@ class TestCafeTestController {
 
         return ['', ''];
     }
+    
+    private getOverriddenWorkspacePath ():string {
+        const alternateWorkspacePath = vscode.workspace.getConfiguration('testcafeTestRunner').get('workspaceRoot')
+        if (typeof(alternateWorkspacePath) === 'string' && alternateWorkspacePath.length > 0 ){
+            return alternateWorkspacePath
+        }
+        return ''
+    }
 
     public startTestRun(browser:string, filePath:string, type:string, name:string = "") {
         if (!type) {
@@ -244,7 +252,8 @@ class TestCafeTestController {
             args.push(name);
         }
 
-        var testCafePath = vscode.workspace.rootPath + TESTCAFE_PATH;
+        const workspacePathOverride = this.getOverriddenWorkspacePath()
+        var testCafePath = vscode.workspace.rootPath + workspacePathOverride + TESTCAFE_PATH;
         if(!fs.existsSync(testCafePath)) {
             vscode.window.showErrorMessage(`TestCafe package is not found. Checked path: ${testCafePath}. Install the testcafe package to your working directory.`);
             return;
@@ -254,9 +263,9 @@ class TestCafeTestController {
             "type": "node2",
             "request": "launch",
             "name": "Launch current test(s) with TestCafe",
-            "program": "${workspaceRoot}" + TESTCAFE_PATH,
+            "program": testCafePath,
             "args": args,
-            "cwd": "${workspaceRoot}",
+            "cwd": "${workspaceRoot}" + workspacePathOverride,
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "runtimeArgs": [
