@@ -85,11 +85,11 @@ To run built-in commands, press `Ctrl+Shift+P` and type the command name:
     "testcafeTestRunner.customArguments": "--speed 0.1"
 }
 ```
-* *testcafeTestRunner.workspaceRoot* - Specifies a relative path to append to the workspace root when searching for the testcafe library. This path should contain a node_modules directory with testcafe installed; defaults to the project root. This setting is useful if you keep your testcafe files in a nested node_modules folder.
+* *testcafeTestRunner.workspaceRoot* - Specifies a relative path to the folder which contains the node_modules folder with the testcafe package. Use this setting if the test files are located in a nested folder with its own node_modules subdirectory.
     * Example:
 ```
 {
-    "testcafeTestRunner.workspaceRoot": "/acceptance"
+    "testcafeTestRunner.workspaceRoot": "./acceptance"
 }
 ```
 

@@ -40,8 +40,8 @@
                         "string",
                         "null"
                     ],
-                    "default": null,
-                    "description": "Specifies a path to add to the workspaceRoot to find the testcafe module, useful if you have your tests in a nested npm project"
+                    "default": "./",
+                    "description": "Specifies a relative path to a folder with node_modules which contains the TestCafe package"
                 }
             }
         },
