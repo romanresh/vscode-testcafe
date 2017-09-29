@@ -85,7 +85,7 @@ To run built-in commands, press `Ctrl+Shift+P` and type the command name:
     "testcafeTestRunner.customArguments": "--speed 0.1"
 }
 ```
-* *testcafeTestRunner.workspaceRoot* - Specifies a relative path to the folder which contains the node_modules folder with the testcafe package. Use this setting if the test files are located in a nested folder with its own node_modules subdirectory.
+* *testcafeTestRunner.workspaceRoot* - Specifies a relative path to the folder which contains the node_modules folder with the testcafe package. Use this setting if the test files are located in a nested folder with its own node_modules subdirectory. Default value is `./`;
     * Example:
 ```
 {

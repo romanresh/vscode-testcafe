@@ -259,17 +259,18 @@ class TestCafeTestController {
             vscode.window.showErrorMessage(`TestCafe package is not found at path ${testCafePath}. Install the testcafe package in your working directory or set the "testcafeTestRunner.workspaceRoot" property.`);
             return;
         }
-
-        vscode.commands.executeCommand("vscode.startDebug", {
-            "type": "node2",
-            "request": "launch",
-            "name": "Launch current test(s) with TestCafe",
-            "program": testCafePath,
-            "args": args,
-            "cwd": path.resolve(vscode.workspace.rootPath, workspacePathOverride),
-            "console": "integratedTerminal",
-            "internalConsoleOptions": "neverOpen",
-            "runtimeArgs": [
+        
+        var workingDirectory = path.resolve(vscode.workspace.rootPath, workspacePathOverride);
+        vscode.debug.startDebugging(undefined, {
+            name: "Launch current test(s) with TestCafe",
+            request: "launch",
+            type: "node",
+            cwd: workingDirectory,
+            program: testCafePath,
+            args: args,
+            console: "integratedTerminal",
+            internalConsoleOptions: "neverOpen",
+            runtimeArgs: [
                 "--no-deprecation"
             ]
         });

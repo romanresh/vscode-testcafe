@@ -2,11 +2,11 @@
     "name": "testcafe-test-runner",
     "displayName": "TestCafe Test Runner",
     "description": "Allows to run TestCafe tests directly from VS Code via context menu or built-in commands",
-    "version": "1.2.0",
+    "version": "1.4.0",
     "publisher": "romanresh",
     "icon": "images/icon.png",
     "engines": {
-        "vscode": "^1.14.0"
+        "vscode": "^1.15.0"
     },
     "categories": [
         "Other",
@@ -319,7 +319,7 @@
                     "command": "testcaferunner.repeatRun",
                     "group": "testcaferunner"
                 },
-                 {
+                {
                     "when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.canRerun",
                     "command": "testcaferunner.repeatRun",
                     "group": "testcaferunner"
@@ -342,11 +342,11 @@
         "testcafe-browser-tools": "1.1.7"
     },
     "devDependencies": {
-        "typescript": "^2.0.3",
-        "vscode": "^1.0.0",
-        "mocha": "^2.3.3",
+        "@types/mocha": "^2.2.32",
         "@types/node": "^6.0.40",
-        "@types/mocha": "^2.2.32"
+        "mocha": "^2.3.3",
+        "typescript": "^2.0.3",
+        "vscode": "^1.1.5"
     },
     "repository": {
         "type": "git",
