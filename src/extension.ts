@@ -261,7 +261,8 @@ class TestCafeTestController {
         }
         
         var workingDirectory = path.resolve(vscode.workspace.rootPath, workspacePathOverride);
-        vscode.debug.startDebugging(undefined, {
+        var wsFolder = vscode.workspace.workspaceFolders ? vscode.workspace.workspaceFolders[0] : undefined;
+        vscode.debug.startDebugging(wsFolder, {
             name: "Launch current test(s) with TestCafe",
             request: "launch",
             type: "node",
