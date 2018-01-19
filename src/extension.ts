@@ -241,7 +241,7 @@ class TestCafeTestController {
         this.lastType = type;
         this.lastName = name;
 
-        var args = [browser, filePath];
+        var args = [browser, vscode.workspace.asRelativePath(filePath)];
 
         var customArguments = vscode.workspace.getConfiguration("testcafeTestRunner").get("customArguments");
         if(typeof(customArguments) === "string") {
