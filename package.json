@@ -1,358 +1,396 @@
 {
-    "name": "testcafe-test-runner",
-    "displayName": "TestCafe Test Runner",
-    "description": "Allows to run TestCafe tests directly from VS Code via context menu or built-in commands",
-    "version": "1.4.1",
-    "publisher": "romanresh",
-    "icon": "images/icon.png",
-    "engines": {
-        "vscode": "^1.15.0"
-    },
-    "categories": [
-        "Other",
-        "Debuggers"
-    ],
-    "keywords": [
-        "TestCafe",
-        "Test",
-        "Runner"
-    ],
-    "activationEvents": [
-        "onLanguage:javascript",
-        "onLanguage:typescript"
-    ],
-    "main": "./out/src/extension",
-    "contributes": {
-        "configuration": {
-            "title": "TestCafe Test Runner configuration",
-            "type": "object",
-            "properties": {
-                "testcafeTestRunner.customArguments": {
-                    "type": [
-                        "string",
-                        "null"
-                    ],
-                    "default": null,
-                    "description": "Specifies custom arguments of the TestCafe Command Line Interface"
-                },
-                "testcafeTestRunner.workspaceRoot": {
-                    "type": [
-                        "string",
-                        "null"
-                    ],
-                    "default": "./",
-                    "description": "Specifies a relative path to a folder with node_modules which contains the TestCafe package"
-                }
-            }
-        },
-        "commands": [
-            {
-                "command": "testcaferunner.runTestsInIE",
-                "title": "TestCafe: Run Test(s) in IE"
-            },
-            {
-                "command": "testcaferunner.runTestsInFirefox",
-                "title": "TestCafe: Run Test(s) in Firefox"
-            },
-            {
-                "command": "testcaferunner.runTestsInChrome",
-                "title": "TestCafe: Run Test(s) in Chrome"
-            },
-            {
-                "command": "testcaferunner.runTestsInChromium",
-                "title": "TestCafe: Run Test(s) in Chromium"
-            },
-            {
-                "command": "testcaferunner.runTestsInOpera",
-                "title": "TestCafe: Run Test(s) in Opera"
-            },
-            {
-                "command": "testcaferunner.runTestsInSafari",
-                "title": "TestCafe: Run Test(s) in Safari"
-            },
-            {
-                "command": "testcaferunner.runTestsInEdge",
-                "title": "TestCafe: Run Test(s) in Edge"
-            },
-            {
-                "command": "testcaferunner.runTestFileInIE",
-                "title": "TestCafe: Run Test(s) in IE"
-            },
-            {
-                "command": "testcaferunner.runTestFileInFirefox",
-                "title": "TestCafe: Run Test(s) in Firefox"
-            },
-            {
-                "command": "testcaferunner.runTestFileInChrome",
-                "title": "TestCafe: Run Test(s) in Chrome"
-            },
-            {
-                "command": "testcaferunner.runTestFileInChromium",
-                "title": "TestCafe: Run Test(s) in Chromium"
-            },
-            {
-                "command": "testcaferunner.runTestFileInOpera",
-                "title": "TestCafe: Run Test(s) in Opera"
-            },
-            {
-                "command": "testcaferunner.runTestFileInSafari",
-                "title": "TestCafe: Run Test(s) in Safari"
-            },
-            {
-                "command": "testcaferunner.runTestFileInEdge",
-                "title": "TestCafe: Run Test(s) in Edge"
-            },
-            {
-                "command": "testcaferunner.repeatRun",
-                "title": "TestCafe: Repeat Previous Test Run"
-            },
-            {
-                "command": "testcaferunner.updateBrowserList",
-                "title": "TestCafe: Refresh Browser List"
-            }
-        ],
-        "keybindings": [
-            {
-                "command": "testcaferunner.repeatRun",
-                "key": "CTRL+Alt+P",
-                "mac": "CMD+Alt+P",
-                "when": "testcaferunner.readyForUX && testcaferunner.canRerun"
-            },
-            {
-                "command": "testcaferunner.updateBrowserList",
-                "key": "CTRL+Alt+U",
-                "mac": "CMD+Alt+U",
-                "when": "testcaferunner.readyForUX"
-            }
-        ],
-        "menus": {
-            "editor/context": [
-                {
-                    "when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.ieInstalled",
-                    "command": "testcaferunner.runTestsInIE",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.firefoxInstalled",
-                    "command": "testcaferunner.runTestsInFirefox",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.chromeInstalled",
-                    "command": "testcaferunner.runTestsInChrome",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.chromiumInstalled",
-                    "command": "testcaferunner.runTestsInChromium",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.operaInstalled",
-                    "command": "testcaferunner.runTestsInOpera",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.safariInstalled",
-                    "command": "testcaferunner.runTestsInSafari",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.edgeInstalled",
-                    "command": "testcaferunner.runTestsInEdge",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.canRerun",
-                    "command": "testcaferunner.repeatRun",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "editorLangId == typescript && testcaferunner.readyForUX && testcaferunner.ieInstalled",
-                    "command": "testcaferunner.runTestsInIE",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "editorLangId == typescript && testcaferunner.readyForUX && testcaferunner.firefoxInstalled",
-                    "command": "testcaferunner.runTestsInFirefox",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "editorLangId == typescript && testcaferunner.readyForUX && testcaferunner.chromeInstalled",
-                    "command": "testcaferunner.runTestsInChrome",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "editorLangId == typescript && testcaferunner.readyForUX && testcaferunner.chromiumInstalled",
-                    "command": "testcaferunner.runTestsInChromium",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "editorLangId == typescript && testcaferunner.readyForUX && testcaferunner.operaInstalled",
-                    "command": "testcaferunner.runTestsInOpera",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "editorLangId == typescript && testcaferunner.readyForUX && testcaferunner.safariInstalled",
-                    "command": "testcaferunner.runTestsInSafari",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "editorLangId == typescript && testcaferunner.readyForUX && testcaferunner.edgeInstalled",
-                    "command": "testcaferunner.runTestsInEdge",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "editorLangId == typescript && testcaferunner.readyForUX && testcaferunner.canRerun",
-                    "command": "testcaferunner.repeatRun",
-                    "group": "testcaferunner"
-                }
-            ],
-            "explorer/context": [
-                {
-                    "when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.ieInstalled",
-                    "command": "testcaferunner.runTestFileInIE",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.firefoxInstalled",
-                    "command": "testcaferunner.runTestFileInFirefox",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.chromeInstalled",
-                    "command": "testcaferunner.runTestFileInChrome",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.chromiumInstalled",
-                    "command": "testcaferunner.runTestFileInChromium",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.operaInstalled",
-                    "command": "testcaferunner.runTestFileInOpera",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.safariInstalled",
-                    "command": "testcaferunner.runTestFileInSafari",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.edgeInstalled",
-                    "command": "testcaferunner.runTestFileInEdge",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.ieInstalled",
-                    "command": "testcaferunner.runTestFileInIE",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.firefoxInstalled",
-                    "command": "testcaferunner.runTestFileInFirefox",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.chromeInstalled",
-                    "command": "testcaferunner.runTestFileInChrome",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.chromiumInstalled",
-                    "command": "testcaferunner.runTestFileInChromium",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.operaInstalled",
-                    "command": "testcaferunner.runTestFileInOpera",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.safariInstalled",
-                    "command": "testcaferunner.runTestFileInSafari",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.edgeInstalled",
-                    "command": "testcaferunner.runTestFileInEdge",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "explorerResourceIsFolder && testcaferunner.readyForUX && testcaferunner.ieInstalled",
-                    "command": "testcaferunner.runTestFileInIE",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "explorerResourceIsFolder && testcaferunner.readyForUX && testcaferunner.firefoxInstalled",
-                    "command": "testcaferunner.runTestFileInFirefox",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "explorerResourceIsFolder && testcaferunner.readyForUX && testcaferunner.chromeInstalled",
-                    "command": "testcaferunner.runTestFileInChrome",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "explorerResourceIsFolder && testcaferunner.readyForUX && testcaferunner.chromiumInstalled",
-                    "command": "testcaferunner.runTestFileInChromium",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "explorerResourceIsFolder && testcaferunner.readyForUX && testcaferunner.operaInstalled",
-                    "command": "testcaferunner.runTestFileInOpera",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "explorerResourceIsFolder && testcaferunner.readyForUX && testcaferunner.safariInstalled",
-                    "command": "testcaferunner.runTestFileInSafari",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "explorerResourceIsFolder && testcaferunner.readyForUX && testcaferunner.edgeInstalled",
-                    "command": "testcaferunner.runTestFileInEdge",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.canRerun",
-                    "command": "testcaferunner.repeatRun",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.canRerun",
-                    "command": "testcaferunner.repeatRun",
-                    "group": "testcaferunner"
-                },
-                {
-                    "when": "explorerResourceIsFolder && testcaferunner.readyForUX && testcaferunner.canRerun",
-                    "command": "testcaferunner.repeatRun",
-                    "group": "testcaferunner"
-                }
-            ]
-        }
-    },
-    "scripts": {
-        "vscode:prepublish": "tsc -p ./",
-        "compile": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
-    },
-    "dependencies": {
-        "testcafe-browser-tools": "1.4.6"
-    },
-    "devDependencies": {
-        "@types/mocha": "^2.2.32",
-        "@types/node": "^6.0.40",
-        "mocha": "^2.3.3",
-        "typescript": "^2.0.3",
-        "vscode": "^1.1.5"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/romanresh/vscode-testcafe"
-    },
-    "bugs": {
-        "url": "https://github.com/romanresh/vscode-testcafe/issues"
-    }
+	"name": "testcafe-test-runner",
+	"displayName": "TestCafe Test Runner",
+	"description": "Allows to run TestCafe tests directly from VS Code via context menu or built-in commands",
+	"version": "1.4.1",
+	"publisher": "romanresh",
+	"icon": "images/icon.png",
+	"engines": {
+		"vscode": "^1.15.0"
+	},
+	"categories": [
+		"Other",
+		"Debuggers"
+	],
+	"keywords": [
+		"TestCafe",
+		"Test",
+		"Runner"
+	],
+	"activationEvents": [
+		"onLanguage:javascript",
+		"onLanguage:typescript"
+	],
+	"main": "./out/src/extension",
+	"contributes": {
+		"configuration": {
+			"title": "TestCafe Test Runner configuration",
+			"type": "object",
+			"properties": {
+				"testcafeTestRunner.customArguments": {
+					"type": [
+						"string",
+						"null"
+					],
+					"default": null,
+					"description": "Specifies custom arguments of the TestCafe Command Line Interface"
+				},
+				"testcafeTestRunner.workspaceRoot": {
+					"type": [
+						"string",
+						"null"
+					],
+					"default": "./",
+					"description": "Specifies a relative path to a folder with node_modules which contains the TestCafe package"
+				}
+			}
+		},
+		"commands": [
+			{
+				"command": "testcaferunner.runTestsInIE",
+				"title": "TestCafe: Run Test(s) in IE"
+			},
+			{
+				"command": "testcaferunner.runTestsInFirefox",
+				"title": "TestCafe: Run Test(s) in Firefox"
+			},
+			{
+				"command": "testcaferunner.runTestsInChrome",
+				"title": "TestCafe: Run Test(s) in Chrome"
+			},
+			{
+				"command": "testcaferunner.runTestsInChromeCanary",
+				"title": "TestCafe: Run Test(s) in Chrome Canary"
+			},
+			{
+				"command": "testcaferunner.runTestsInChromium",
+				"title": "TestCafe: Run Test(s) in Chromium"
+			},
+			{
+				"command": "testcaferunner.runTestsInOpera",
+				"title": "TestCafe: Run Test(s) in Opera"
+			},
+			{
+				"command": "testcaferunner.runTestsInSafari",
+				"title": "TestCafe: Run Test(s) in Safari"
+			},
+			{
+				"command": "testcaferunner.runTestsInEdge",
+				"title": "TestCafe: Run Test(s) in Edge"
+			},
+			{
+				"command": "testcaferunner.runTestFileInIE",
+				"title": "TestCafe: Run Test(s) in IE"
+			},
+			{
+				"command": "testcaferunner.runTestFileInFirefox",
+				"title": "TestCafe: Run Test(s) in Firefox"
+			},
+			{
+				"command": "testcaferunner.runTestFileInChrome",
+				"title": "TestCafe: Run Test(s) in Chrome"
+			},
+			{
+				"command": "testcaferunner.runTestFileInChromeCanary",
+				"title": "TestCafe: Run Test(s) in Chrome Canary"
+			},
+			{
+				"command": "testcaferunner.runTestFileInChromium",
+				"title": "TestCafe: Run Test(s) in Chromium"
+			},
+			{
+				"command": "testcaferunner.runTestFileInOpera",
+				"title": "TestCafe: Run Test(s) in Opera"
+			},
+			{
+				"command": "testcaferunner.runTestFileInSafari",
+				"title": "TestCafe: Run Test(s) in Safari"
+			},
+			{
+				"command": "testcaferunner.runTestFileInEdge",
+				"title": "TestCafe: Run Test(s) in Edge"
+			},
+			{
+				"command": "testcaferunner.repeatRun",
+				"title": "TestCafe: Repeat Previous Test Run"
+			},
+			{
+				"command": "testcaferunner.updateBrowserList",
+				"title": "TestCafe: Refresh Browser List"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "testcaferunner.repeatRun",
+				"key": "CTRL+Alt+P",
+				"mac": "CMD+Alt+P",
+				"when": "testcaferunner.readyForUX && testcaferunner.canRerun"
+			},
+			{
+				"command": "testcaferunner.updateBrowserList",
+				"key": "CTRL+Alt+U",
+				"mac": "CMD+Alt+U",
+				"when": "testcaferunner.readyForUX"
+			}
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.ieInstalled",
+					"command": "testcaferunner.runTestsInIE",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.firefoxInstalled",
+					"command": "testcaferunner.runTestsInFirefox",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.chromeInstalled",
+					"command": "testcaferunner.runTestsInChrome",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.chrome-canaryInstalled",
+					"command": "testcaferunner.runTestsInChromeCanary",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.chromiumInstalled",
+					"command": "testcaferunner.runTestsInChromium",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.operaInstalled",
+					"command": "testcaferunner.runTestsInOpera",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.safariInstalled",
+					"command": "testcaferunner.runTestsInSafari",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.edgeInstalled",
+					"command": "testcaferunner.runTestsInEdge",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.canRerun",
+					"command": "testcaferunner.repeatRun",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "editorLangId == typescript && testcaferunner.readyForUX && testcaferunner.ieInstalled",
+					"command": "testcaferunner.runTestsInIE",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "editorLangId == typescript && testcaferunner.readyForUX && testcaferunner.firefoxInstalled",
+					"command": "testcaferunner.runTestsInFirefox",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "editorLangId == typescript && testcaferunner.readyForUX && testcaferunner.chromeInstalled",
+					"command": "testcaferunner.runTestsInChrome",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "editorLangId == typescript && testcaferunner.readyForUX && testcaferunner.chrome-canaryInstalled",
+					"command": "testcaferunner.runTestsInChromeCanary",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "editorLangId == typescript && testcaferunner.readyForUX && testcaferunner.chromiumInstalled",
+					"command": "testcaferunner.runTestsInChromium",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "editorLangId == typescript && testcaferunner.readyForUX && testcaferunner.operaInstalled",
+					"command": "testcaferunner.runTestsInOpera",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "editorLangId == typescript && testcaferunner.readyForUX && testcaferunner.safariInstalled",
+					"command": "testcaferunner.runTestsInSafari",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "editorLangId == typescript && testcaferunner.readyForUX && testcaferunner.edgeInstalled",
+					"command": "testcaferunner.runTestsInEdge",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "editorLangId == typescript && testcaferunner.readyForUX && testcaferunner.canRerun",
+					"command": "testcaferunner.repeatRun",
+					"group": "testcaferunner"
+				}
+			],
+			"explorer/context": [
+				{
+					"when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.ieInstalled",
+					"command": "testcaferunner.runTestFileInIE",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.firefoxInstalled",
+					"command": "testcaferunner.runTestFileInFirefox",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.chromeInstalled",
+					"command": "testcaferunner.runTestFileInChrome",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.chrome-canaryInstalled",
+					"command": "testcaferunner.runTestFileInChromeCanary",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.chromiumInstalled",
+					"command": "testcaferunner.runTestFileInChromium",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.operaInstalled",
+					"command": "testcaferunner.runTestFileInOpera",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.safariInstalled",
+					"command": "testcaferunner.runTestFileInSafari",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.edgeInstalled",
+					"command": "testcaferunner.runTestFileInEdge",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.ieInstalled",
+					"command": "testcaferunner.runTestFileInIE",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.firefoxInstalled",
+					"command": "testcaferunner.runTestFileInFirefox",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.chromeInstalled",
+					"command": "testcaferunner.runTestFileInChrome",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.chrome-canaryInstalled",
+					"command": "testcaferunner.runTestFileInChromeCanary",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.chromiumInstalled",
+					"command": "testcaferunner.runTestFileInChromium",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.operaInstalled",
+					"command": "testcaferunner.runTestFileInOpera",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.safariInstalled",
+					"command": "testcaferunner.runTestFileInSafari",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.edgeInstalled",
+					"command": "testcaferunner.runTestFileInEdge",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "explorerResourceIsFolder && testcaferunner.readyForUX && testcaferunner.ieInstalled",
+					"command": "testcaferunner.runTestFileInIE",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "explorerResourceIsFolder && testcaferunner.readyForUX && testcaferunner.firefoxInstalled",
+					"command": "testcaferunner.runTestFileInFirefox",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "explorerResourceIsFolder && testcaferunner.readyForUX && testcaferunner.chromeInstalled",
+					"command": "testcaferunner.runTestFileInChrome",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "explorerResourceIsFolder && testcaferunner.readyForUX && testcaferunner.chrome-canaryInstalled",
+					"command": "testcaferunner.runTestFileInChromeCanary",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "explorerResourceIsFolder && testcaferunner.readyForUX && testcaferunner.chromiumInstalled",
+					"command": "testcaferunner.runTestFileInChromium",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "explorerResourceIsFolder && testcaferunner.readyForUX && testcaferunner.operaInstalled",
+					"command": "testcaferunner.runTestFileInOpera",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "explorerResourceIsFolder && testcaferunner.readyForUX && testcaferunner.safariInstalled",
+					"command": "testcaferunner.runTestFileInSafari",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "explorerResourceIsFolder && testcaferunner.readyForUX && testcaferunner.edgeInstalled",
+					"command": "testcaferunner.runTestFileInEdge",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.canRerun",
+					"command": "testcaferunner.repeatRun",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.canRerun",
+					"command": "testcaferunner.repeatRun",
+					"group": "testcaferunner"
+				},
+				{
+					"when": "explorerResourceIsFolder && testcaferunner.readyForUX && testcaferunner.canRerun",
+					"command": "testcaferunner.repeatRun",
+					"group": "testcaferunner"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "tsc -p ./",
+		"compile": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "node ./node_modules/vscode/bin/test"
+	},
+	"dependencies": {
+		"testcafe-browser-tools": "1.4.6"
+	},
+	"devDependencies": {
+		"@types/mocha": "^2.2.32",
+		"@types/node": "^6.0.40",
+		"mocha": "^2.3.3",
+		"typescript": "^2.0.3",
+		"vscode": "^1.1.5"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/romanresh/vscode-testcafe"
+	},
+	"bugs": {
+		"url": "https://github.com/romanresh/vscode-testcafe/issues"
+	},
+	"__metadata": {
+		"id": "72f84f96-6dde-41a3-9fec-3ea137cde9d1",
+		"publisherDisplayName": "Roman Resh",
+		"publisherId": "69e83783-010b-45e6-b222-ef4ce6662aaa"
+	}
 }

@@ -6,7 +6,7 @@ import * as path from 'path';
 
 const TEST_OR_FIXTURE_RE = /(^|;|\s+|\/\/|\/\*)fixture\s*(\(.+?\)|`.+?`)|(^|;|\s+|\/\/|\/\*)test\s*\(\s*(.+?)\s*,/gm;
 const CLEANUP_TEST_OR_FIXTURE_NAME_RE = /(^\(?\s*(\'|"|`))|((\'|"|`)\s*\)?$)/g;
-const BROWSER_ALIASES = ['ie', 'firefox', 'chrome', 'chromium', 'opera', 'safari', 'edge'];
+const BROWSER_ALIASES = ['ie', 'firefox', 'chrome', 'chrome-canary', 'chromium', 'opera', 'safari', 'edge'];
 const TESTCAFE_PATH = "./node_modules/testcafe/lib/cli/index.js";
 
 var browserTools = require ('testcafe-browser-tools');
@@ -26,6 +26,11 @@ function registerRunTestsCommands (context:vscode.ExtensionContext){
     context.subscriptions.push(
         vscode.commands.registerCommand('testcaferunner.runTestsInChrome', () => {
             controller.runTests("chrome");
+        })
+    );
+    context.subscriptions.push(
+        vscode.commands.registerCommand('testcaferunner.runTestsInChromeCanary', () => {
+            controller.runTests("chrome-canary");
         })
     );
     context.subscriptions.push(
@@ -64,6 +69,11 @@ function registerRunTestFileCommands (context:vscode.ExtensionContext){
     context.subscriptions.push(
         vscode.commands.registerCommand('testcaferunner.runTestFileInChrome', args => {
             controller.startTestRun("chrome", args.fsPath, "file");
+        })
+    );
+    context.subscriptions.push(
+        vscode.commands.registerCommand('testcaferunner.runTestFileInChromeCanary', args => {
+            controller.startTestRun("chrome-canary", args.fsPath, "file");
         })
     );
     context.subscriptions.push(
