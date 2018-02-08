@@ -59,6 +59,10 @@
                 "title": "TestCafe: Run Test(s) in Chrome"
             },
             {
+                "command": "testcaferunner.runTestsInChromeCanary",
+                "title": "TestCafe: Run Test(s) in Chrome Canary"
+            },
+            {
                 "command": "testcaferunner.runTestsInChromium",
                 "title": "TestCafe: Run Test(s) in Chromium"
             },
@@ -85,6 +89,10 @@
             {
                 "command": "testcaferunner.runTestFileInChrome",
                 "title": "TestCafe: Run Test(s) in Chrome"
+            },
+            {
+                "command": "testcaferunner.runTestFileInChromeCanary",
+                "title": "TestCafe: Run Test(s) in Chrome Canary"
             },
             {
                 "command": "testcaferunner.runTestFileInChromium",
@@ -143,6 +151,11 @@
                     "group": "testcaferunner"
                 },
                 {
+                    "when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.chrome-canaryInstalled",
+                    "command": "testcaferunner.runTestsInChromeCanary",
+                    "group": "testcaferunner"
+                },
+                {
                     "when": "editorLangId == javascript && testcaferunner.readyForUX && testcaferunner.chromiumInstalled",
                     "command": "testcaferunner.runTestsInChromium",
                     "group": "testcaferunner"
@@ -180,6 +193,11 @@
                 {
                     "when": "editorLangId == typescript && testcaferunner.readyForUX && testcaferunner.chromeInstalled",
                     "command": "testcaferunner.runTestsInChrome",
+                    "group": "testcaferunner"
+                },
+                {
+                    "when": "editorLangId == typescript && testcaferunner.readyForUX && testcaferunner.chrome-canaryInstalled",
+                    "command": "testcaferunner.runTestsInChromeCanary",
                     "group": "testcaferunner"
                 },
                 {
@@ -225,6 +243,11 @@
                     "group": "testcaferunner"
                 },
                 {
+                    "when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.chrome-canaryInstalled",
+                    "command": "testcaferunner.runTestFileInChromeCanary",
+                    "group": "testcaferunner"
+                },
+                {
                     "when": "resourceLangId == javascript && testcaferunner.readyForUX && testcaferunner.chromiumInstalled",
                     "command": "testcaferunner.runTestFileInChromium",
                     "group": "testcaferunner"
@@ -260,6 +283,11 @@
                     "group": "testcaferunner"
                 },
                 {
+                    "when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.chrome-canaryInstalled",
+                    "command": "testcaferunner.runTestFileInChromeCanary",
+                    "group": "testcaferunner"
+                },
+                {
                     "when": "resourceLangId == typescript && testcaferunner.readyForUX && testcaferunner.chromiumInstalled",
                     "command": "testcaferunner.runTestFileInChromium",
                     "group": "testcaferunner"
@@ -292,6 +320,11 @@
                 {
                     "when": "explorerResourceIsFolder && testcaferunner.readyForUX && testcaferunner.chromeInstalled",
                     "command": "testcaferunner.runTestFileInChrome",
+                    "group": "testcaferunner"
+                },
+                {
+                    "when": "explorerResourceIsFolder && testcaferunner.readyForUX && testcaferunner.chrome-canaryInstalled",
+                    "command": "testcaferunner.runTestFileInChromeCanary",
                     "group": "testcaferunner"
                 },
                 {
@@ -339,7 +372,7 @@
         "test": "node ./node_modules/vscode/bin/test"
     },
     "dependencies": {
-        "testcafe-browser-tools": "1.1.7"
+        "testcafe-browser-tools": "1.4.6"
     },
     "devDependencies": {
         "@types/mocha": "^2.2.32",
@@ -354,5 +387,10 @@
     },
     "bugs": {
         "url": "https://github.com/romanresh/vscode-testcafe/issues"
+    },
+    "__metadata": {
+        "id": "72f84f96-6dde-41a3-9fec-3ea137cde9d1",
+        "publisherDisplayName": "Roman Resh",
+        "publisherId": "69e83783-010b-45e6-b222-ef4ce6662aaa"
     }
 }
