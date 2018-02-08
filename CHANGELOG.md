@@ -3,6 +3,9 @@ All notable changes to the "testcafe-test-runner" extension will be documented i
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.4.2]
+- Added the Chrome Canary support
+
 ## [1.4.1]
 - Fix the "Cannot read property 'uri' of undefined" error
 
