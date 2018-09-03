@@ -3,6 +3,9 @@ All notable changes to the "testcafe-test-runner" extension will be documented i
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.4.3]
+- Supported the custom meta settings (https://github.com/DevExpress/testcafe/issues/2242)
+
 ## [1.4.2]
 - Added the Chrome Canary support
 
