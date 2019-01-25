@@ -8,6 +8,7 @@ const TEST_OR_FIXTURE_RE = /(^|;|\s+|\/\/|\/\*)fixture\s*(\(.+?\)|`.+?`)|(^|;|\s
 const CLEANUP_TEST_OR_FIXTURE_NAME_RE = /(^\(?\s*(\'|"|`))|((\'|"|`)\s*\)?$)/g;
 const BROWSER_ALIASES = ['ie', 'firefox', 'chrome', 'chrome-canary', 'chromium', 'opera', 'safari', 'edge'];
 const TESTCAFE_PATH = "./node_modules/testcafe/lib/cli/index.js";
+const TESTCAFE_LIVE_PATH = "./node_modules/testcafe-live/lib/index.js"
 
 var browserTools = require ('testcafe-browser-tools');
 let controller: TestCafeTestController = null;
@@ -240,6 +241,13 @@ class TestCafeTestController {
         return ''
     }
 
+    private isLiverRunner(): boolean {
+        const useLiveRunner = vscode.workspace.getConfiguration('testcafeTestRunner').get('useLiveRunner')
+        if (typeof(useLiveRunner) === 'boolean' && useLiveRunner){
+            return useLiveRunner;
+        }
+    }
+
     public startTestRun(browser:string, filePath:string, type:string, name:string = "") {
         if (!type) {
             vscode.window.showErrorMessage(`No tests found. Position the cursor inside a test() function or fixture.`);
@@ -264,7 +272,8 @@ class TestCafeTestController {
         }
 
         const workspacePathOverride = this.getOverriddenWorkspacePath()
-        var testCafePath = path.resolve(vscode.workspace.rootPath, workspacePathOverride, TESTCAFE_PATH);
+        const runnerPath = (this.isLiverRunner()) ? TESTCAFE_LIVE_PATH : TESTCAFE_PATH;
+        var testCafePath = path.resolve(vscode.workspace.rootPath, workspacePathOverride, runnerPath);
         if(!fs.existsSync(testCafePath)) {
             vscode.window.showErrorMessage(`TestCafe package is not found at path ${testCafePath}. Install the testcafe package in your working directory or set the "testcafeTestRunner.workspaceRoot" property.`);
             return;

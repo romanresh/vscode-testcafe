@@ -15,6 +15,12 @@
 [TestCafe](https://github.com/DevExpress/testcafe) should be installed in your project as a local package. To install it, use the `npm install testcafe` command.
 For Mac OS, add `TestCafe` to dependencies in your `package.json` file. Your project should contain TestCafe modules in `node_modules\testcafe\...`.
 
+### Optional
+This is only required if you would like the option to use the [TestCafe Live](https://github.com/DevExpress/testcafe-live) runner in place of 
+[TestCafe](https://github.com/DevExpress/testcafe). Note that TestCafe Live depends on TestCafe, but they are separate repositories. In other words, you need to install both TestCafe and TestCafe Live if you wish to use the TestCafe Live runner.
+
+Use the `npm install testcafe-live` command.
+
 ## How to install extension
 
 Install the **TestCafe Test Runner** extension from VS Code Marketplace as described in the VS Code [documentation](https://code.visualstudio.com/Docs/editor/extension-gallery).
@@ -92,9 +98,16 @@ To run built-in commands, press `Ctrl+Shift+P` and type the command name:
     "testcafeTestRunner.workspaceRoot": "./acceptance"
 }
 ```
-
+* *testcafeTestRunner.useLiveRunner* - Specifies which testcafe runner to use (TestCafe Live or TestCafe). Default value is `false`;
+    * Example:
+```
+{
+    "testcafeTestRunner.userLiveRunner": true
+}
+```
 
 ## Sources
 
 * [TestCafe Test Runner](https://github.com/romanresh/vscode-testcafe)
 * [TestCafe](https://github.com/DevExpress/testcafe)
+* [TestCafe](https://github.com/DevExpress/testcafe-live)
