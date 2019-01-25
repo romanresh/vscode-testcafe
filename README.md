@@ -110,4 +110,4 @@ To run built-in commands, press `Ctrl+Shift+P` and type the command name:
 
 * [TestCafe Test Runner](https://github.com/romanresh/vscode-testcafe)
 * [TestCafe](https://github.com/DevExpress/testcafe)
-* [TestCafe](https://github.com/DevExpress/testcafe-live)
+* [TestCafe Live](https://github.com/DevExpress/testcafe-live)
