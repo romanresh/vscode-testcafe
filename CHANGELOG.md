@@ -2,9 +2,11 @@
 All notable changes to the "testcafe-test-runner" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## [1.4.5]
+- Minor fixes.
 
 ## [1.4.4]
-- Addede testcafe-live support [#27](https://github.com/romanresh/vscode-testcafe/issues/27). Thanks to [@djbreen7](https://github.com/djbreen7)
+- Added testcafe-live support [#27](https://github.com/romanresh/vscode-testcafe/issues/27). Thanks to [@djbreen7](https://github.com/djbreen7).
 
 ## [1.4.3]
 - Supported the custom meta settings (https://github.com/DevExpress/testcafe/issues/2242)
