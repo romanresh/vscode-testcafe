@@ -42,14 +42,6 @@
                     ],
                     "default": "./",
                     "description": "Specifies a relative path to a folder with node_modules which contains the TestCafe package"
-                },
-                "testcafeTestRunner.useLiveRunner": {
-                    "type": [
-                        "boolean",
-                        "null"
-                    ],
-                    "default": false,
-                    "description": "Specifies which testcafe runner to use (TestCafe Live or TestCafe)"
                 }
             }
         },
