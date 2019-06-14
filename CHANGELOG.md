@@ -5,6 +5,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [1.5.0]
 - Added the TestCafe headless mode [#32](https://github.com/romanresh/vscode-testcafe/issues/32).
 - Use the built-in TestCafe live mode instead of the testcafe-live package.
+- Fix tests contained the comma symbol [#25](https://github.com/romanresh/vscode-testcafe/issues/32)
 
 ## [1.4.5]
 - Minor fixes.
