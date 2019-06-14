@@ -105,6 +105,13 @@ To run built-in commands, press `Ctrl+Shift+P` and type the command name:
     "testcafeTestRunner.userLiveRunner": true
 }
 ```
+* *testcafeTestRunner.useHeadlessMode* - Run tests in Google Chrome and Mozilla Firefox without any visible UI shell. Default value is `false`;
+    * Example:
+```
+{
+    "testcafeTestRunner.useHeadlessMode": true
+}
+```
 
 ## Sources
 

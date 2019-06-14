@@ -2,7 +2,7 @@
     "name": "testcafe-test-runner",
     "displayName": "TestCafe Test Runner",
     "description": "Allows to run TestCafe tests directly from VS Code via context menu or built-in commands",
-    "version": "1.4.5",
+    "version": "2.0.0",
     "publisher": "romanresh",
     "icon": "images/icon.png",
     "engines": {
@@ -50,6 +50,14 @@
                     ],
                     "default": false,
                     "description": "Specifies which testcafe runner to use (TestCafe Live or TestCafe)"
+                },
+                "testcafeTestRunner.useHeadlessMode": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ],
+                    "default": false,
+                    "description": "Run tests in Google Chrome and Mozilla Firefox without any visible UI shell"
                 }
             }
         },
@@ -380,12 +388,10 @@
         "test": "node ./node_modules/vscode/bin/test"
     },
     "dependencies": {
-        "testcafe-browser-tools": "1.4.6"
+        "testcafe-browser-tools": "^1.6.5"
     },
     "devDependencies": {
-        "@types/mocha": "^2.2.32",
         "@types/node": "^6.0.40",
-        "mocha": "^2.3.3",
         "typescript": "^2.0.3",
         "vscode": "^1.1.5"
     },
