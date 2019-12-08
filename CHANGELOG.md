@@ -2,6 +2,10 @@
 All notable changes to the "testcafe-test-runner" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## [2.1.0]
+- Support portable versions of browsers
+- Fix apostrophe symbol in test names [#37](https://github.com/romanresh/vscode-testcafe/pull/37). Thanks to [@markfknight](https://github.com/markfknight).
+
 ## [1.5.0]
 - Added the TestCafe headless mode [#32](https://github.com/romanresh/vscode-testcafe/issues/32).
 - Use the built-in TestCafe live mode instead of the testcafe-live package.

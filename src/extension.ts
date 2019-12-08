@@ -7,6 +7,7 @@ import * as path from 'path';
 const TEST_OR_FIXTURE_RE = /(^|;|\s+|\/\/|\/\*)fixture\s*(\(.+?\)|`.+?`)|(^|;|\s+|\/\/|\/\*)test\s*(?:\.[a-zA-Z]+\([^\)]*\))*\s*\(\s*(.+?)\s*('|"|`)\s*,/gm;
 const CLEANUP_TEST_OR_FIXTURE_NAME_RE = /(^\(?\s*(\'|"|`))|((\'|"|`)\s*\)?$)/g;
 const BROWSER_ALIASES = ['ie', 'firefox', 'chrome', 'chrome-canary', 'chromium', 'opera', 'safari', 'edge'];
+const PORTABLE_BROWSERS = ["portableFirefox", "portableChrome"];
 const TESTCAFE_PATH = "./node_modules/testcafe/lib/cli/index.js";
 const HEADLESS_MODE_POSTFIX = ":headless";
 
@@ -27,6 +28,16 @@ function registerRunTestsCommands (context:vscode.ExtensionContext){
     context.subscriptions.push(
         vscode.commands.registerCommand('testcaferunner.runTestsInChrome', () => {
             controller.runTests("chrome");
+        })
+    );
+    context.subscriptions.push(
+        vscode.commands.registerCommand('testcaferunner.runTestsInPortableFirefox', () => {
+            controller.runTests("portableFirefox", true);
+        })
+    );
+    context.subscriptions.push(
+        vscode.commands.registerCommand('testcaferunner.runTestsInPortableChrome', () => {
+            controller.runTests("portableChrome", true);
         })
     );
     context.subscriptions.push(
@@ -59,42 +70,52 @@ function registerRunTestsCommands (context:vscode.ExtensionContext){
 function registerRunTestFileCommands (context:vscode.ExtensionContext){
     context.subscriptions.push(
         vscode.commands.registerCommand('testcaferunner.runTestFileInIE', args => {
-            controller.startTestRun("ie", args.fsPath, "file");
+            controller.startTestRun({name: "ie"}, args.fsPath, "file");
         })
     );
     context.subscriptions.push(
         vscode.commands.registerCommand('testcaferunner.runTestFileInFirefox', args => {
-            controller.startTestRun("firefox", args.fsPath, "file");
+            controller.startTestRun({name: "firefox"}, args.fsPath, "file");
         })
     );
     context.subscriptions.push(
         vscode.commands.registerCommand('testcaferunner.runTestFileInChrome', args => {
-            controller.startTestRun("chrome", args.fsPath, "file");
+            controller.startTestRun({name: "chrome"}, args.fsPath, "file");
+        })
+    );
+    context.subscriptions.push(
+        vscode.commands.registerCommand('testcaferunner.runTestFileInPortableFirefox', args => {
+            controller.startTestRun({name: "portableFirefox", isPortable: true}, args.fsPath, "file", undefined);
+        })
+    );
+    context.subscriptions.push(
+        vscode.commands.registerCommand('testcaferunner.runTestFileInPortableChrome', args => {
+            controller.startTestRun({name: "portableChrome", isPortable: true}, args.fsPath, "file", undefined);
         })
     );
     context.subscriptions.push(
         vscode.commands.registerCommand('testcaferunner.runTestFileInChromeCanary', args => {
-            controller.startTestRun("chrome-canary", args.fsPath, "file");
+            controller.startTestRun({name: "chrome-canary"}, args.fsPath, "file");
         })
     );
     context.subscriptions.push(
         vscode.commands.registerCommand('testcaferunner.runTestFileInChromium', args => {
-            controller.startTestRun("chromium", args.fsPath, "file");
+            controller.startTestRun({name: "chromium"}, args.fsPath, "file");
         })
     );
     context.subscriptions.push(
         vscode.commands.registerCommand('testcaferunner.runTestFileInOpera', args => {
-            controller.startTestRun("opera", args.fsPath, "file");
+            controller.startTestRun({name: "opera"}, args.fsPath, "file");
         })
     );
     context.subscriptions.push(
         vscode.commands.registerCommand('testcaferunner.runTestFileInSafari', args => {
-            controller.startTestRun("safari", args.fsPath, "file");
+            controller.startTestRun({name: "safari"}, args.fsPath, "file");
         })
     );
     context.subscriptions.push(
         vscode.commands.registerCommand('testcaferunner.runTestFileInEdge', args => {
-            controller.startTestRun("edge", args.fsPath, "file");
+            controller.startTestRun({name: "edge"}, args.fsPath, "file");
         })
     );
 }
@@ -113,7 +134,22 @@ function updateInstalledBrowserFlags (){
                 if(installations.indexOf(aliase) !== -1 )
                     vscode.commands.executeCommand('setContext', 'testcaferunner.' + aliase + 'Installed', true);
             }
+            for(var aliase of PORTABLE_BROWSERS) {
+                if(getPortableBrowserPath(aliase))
+                    vscode.commands.executeCommand('setContext', 'testcaferunner.' + aliase + 'Installed', true);
+            }
         });
+}
+
+function getPortableBrowserPath(browser: string): string {
+    switch(browser) {
+        case "portableFirefox":
+            return vscode.workspace.getConfiguration("testcafeTestRunner").get("portableFirefoxPath");
+        case "portableChrome":
+            return vscode.workspace.getConfiguration("testcafeTestRunner").get("portableChromePath");
+        default:
+            throw "Unknown portable browser";
+    }
 }
 
 export function activate(context:vscode.ExtensionContext) {
@@ -149,12 +185,12 @@ export function deactivate() {
 }
 
 class TestCafeTestController {
-    lastBrowser:string;
+    lastBrowser: IBrowser;
     lastFile:string;
     lastType:string;
     lastName:string;
 
-    public runTests(browser:string) {
+    public runTests(browser:string, isPortable: boolean = false) {
         let editor = vscode.window.activeTextEditor;
 
         if (!editor)
@@ -176,7 +212,7 @@ class TestCafeTestController {
 
         var [type, name] = this.findTestOrFixtureName(textBeforeSelection, cursorPosition);
 
-        this.startTestRun(browser, document.fileName, type, name);
+        this.startTestRun({name: browser, isPortable: isPortable}, document.fileName, type, name);
     }
 
     public repeatLastRun() {
@@ -255,20 +291,24 @@ class TestCafeTestController {
         }
     }
 
-    public startTestRun(browser:string, filePath:string, type:string, name:string = "") {
+    public startTestRun(browser: IBrowser, filePath:string, type:string, name:string = "") {
         if (!type) {
             vscode.window.showErrorMessage(`No tests found. Position the cursor inside a test() function or fixture.`);
             return;
         }
-
+        let browserArg = browser.name;
         this.lastBrowser = browser;
         this.lastFile = filePath;
         this.lastType = type;
         this.lastName = name;
+        if(browser.isPortable) {
+            const path = getPortableBrowserPath(browser.name);
+            browserArg = `path:\`${path}\``;
+        }
         if(this.isHeadlessMode())
-            browser += HEADLESS_MODE_POSTFIX;
+            browserArg += HEADLESS_MODE_POSTFIX;
 
-        var args = [browser, filePath];
+        var args = [browserArg, filePath];
 
         var customArguments = vscode.workspace.getConfiguration("testcafeTestRunner").get("customArguments");
         if(typeof(customArguments) === "string") {
@@ -310,4 +350,10 @@ class TestCafeTestController {
     dispose() {
 
     }
+}
+
+
+interface IBrowser {
+    name: string;
+    isPortable?: boolean;
 }

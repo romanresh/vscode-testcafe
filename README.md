@@ -113,6 +113,14 @@ To run built-in commands, press `Ctrl+Shift+P` and type the command name:
 }
 ```
 
+* *testcafeTestRunner.portableFirefoxPath* or *testcafeTestRunner.portableChromePath* - Specifies a path to the portable Chrome's or Firefox's executable file. The corresponding commands will become available if these options are specified;
+    * Example:
+```
+{
+    "testcafeTestRunner.portableFirefoxPath": "C:\Program Files (x86)\Firefox Portable\firefox.exe"
+}
+```
+
 ## Sources
 
 * [TestCafe Test Runner](https://github.com/romanresh/vscode-testcafe)
