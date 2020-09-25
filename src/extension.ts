@@ -312,7 +312,11 @@ class TestCafeTestController {
 
         var customArguments = vscode.workspace.getConfiguration("testcafeTestRunner").get("customArguments");
         if(typeof(customArguments) === "string") {
-            args = args.concat((<string>customArguments).split(" "));
+            const argPattern = /[^\s"]+|"([^"]*)"/g;
+            do {
+                const match = argPattern.exec(<string>customArguments);
+                if (match !== null) { args.push(match[1] ? match[1] : match[0]); }
+            } while (match !== null);
         }
 
         if (type !== "file") {
