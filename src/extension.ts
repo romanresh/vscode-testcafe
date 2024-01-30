@@ -313,8 +313,9 @@ class TestCafeTestController {
         var customArguments = vscode.workspace.getConfiguration("testcafeTestRunner").get("customArguments");
         if(typeof(customArguments) === "string") {
             const argPattern = /[^\s"]+|"([^"]*)"/g;
+            let match;
             do {
-                const match = argPattern.exec(<string>customArguments);
+                match = argPattern.exec(<string>customArguments);
                 if (match !== null) { 
                     args.push(match[1] ? match[1] : match[0]); 
                     if (match[0] === '--ignore-certificate-errors') {
