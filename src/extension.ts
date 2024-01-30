@@ -323,6 +323,12 @@ class TestCafeTestController {
                 }
             } while (match !== null);
         }
+    
+        // Enclose browserArg in quotes if it includes flags
+        if (browserArg.includes(' ')) {
+            browserArg = `'${browserArg}'`;
+        }
+    
         args[0] = browserArg; // Update the browser argument with the potentially modified browserArg
 
         if (type !== "file") {
