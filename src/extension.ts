@@ -315,9 +315,15 @@ class TestCafeTestController {
             const argPattern = /[^\s"]+|"([^"]*)"/g;
             do {
                 const match = argPattern.exec(<string>customArguments);
-                if (match !== null) { args.push(match[1] ? match[1] : match[0]); }
+                if (match !== null) { 
+                    args.push(match[1] ? match[1] : match[0]); 
+                    if (match[0] === '--ignore-certificate-errors') {
+                        browserArg += ' --ignore-certificate-errors';
+                    }
+                }
             } while (match !== null);
         }
+        args[0] = browserArg; // Update the browser argument with the potentially modified browserArg
 
         if (type !== "file") {
             args.push("--" + type);
