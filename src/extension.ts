@@ -307,9 +307,9 @@ class TestCafeTestController {
         }
         if(this.isHeadlessMode())
             browserArg += HEADLESS_MODE_POSTFIX;
-    
+
         var args = [browserArg, filePath];
-    
+
         var customArguments = vscode.workspace.getConfiguration("testcafeTestRunner").get("customArguments");
         if(typeof(customArguments) === "string") {
             const argPattern = /[^\s"]+|"([^"]*)"/g;
@@ -320,15 +320,25 @@ class TestCafeTestController {
                     if (match[0] !== '--ignore-certificate-errors') {
                         args.push(match[1] ? match[1] : match[0]); 
                     }
+                    if (match[0] === '--ignore-certificate-errors') {
+                        browserArg += ' --ignore-certificate-errors';
+                    }
                 }
             } while (match !== null);
         }
     
+        // Enclose browserArg in quotes if it includes flags
+        if (browserArg.includes(' ')) {
+            browserArg = `'${browserArg}'`;
+        }
+    
+        args[0] = browserArg; // Update the browser argument with the potentially modified browserArg
+
         if (type !== "file") {
             args.push("--" + type);
             args.push(name);
         }
-    
+
         const workspacePathOverride = this.getOverriddenWorkspacePath()
         if(this.isLiverRunner())
             args.push("--live");
