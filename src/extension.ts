@@ -317,7 +317,9 @@ class TestCafeTestController {
             do {
                 match = argPattern.exec(<string>customArguments);
                 if (match !== null) { 
-                    args.push(match[1] ? match[1] : match[0]); 
+                    if (match[0] !== '--ignore-certificate-errors') {
+                        args.push(match[1] ? match[1] : match[0]); 
+                    }
                     if (match[0] === '--ignore-certificate-errors') {
                         browserArg += ' --ignore-certificate-errors';
                     }
