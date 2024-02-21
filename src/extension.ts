@@ -317,11 +317,11 @@ class TestCafeTestController {
             do {
                 match = argPattern.exec(<string>customArguments);
                 if (match !== null) { 
-                    if (match[0] !== '--ignore-certificate-errors') {
+                    if (match[0] !== '--ignore-certificate-errors' && match[0] !== '--start-fullscreen') {
                         args.push(match[1] ? match[1] : match[0]); 
                     }
-                    if (match[0] === '--ignore-certificate-errors') {
-                        browserArg += ' --ignore-certificate-errors';
+                    if (match[0] === '--ignore-certificate-errors' || match[0] === '--start-fullscreen') {
+                        browserArg += ' ' + match[0];
                     }
                 }
             } while (match !== null);
