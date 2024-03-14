@@ -313,11 +313,26 @@ class TestCafeTestController {
         var customArguments = vscode.workspace.getConfiguration("testcafeTestRunner").get("customArguments");
         if(typeof(customArguments) === "string") {
             const argPattern = /[^\s"]+|"([^"]*)"/g;
+            let match;
             do {
-                const match = argPattern.exec(<string>customArguments);
-                if (match !== null) { args.push(match[1] ? match[1] : match[0]); }
+                match = argPattern.exec(<string>customArguments);
+                if (match !== null) { 
+                    if (match[0] !== '--ignore-certificate-errors' && match[0] !== '--start-fullscreen') {
+                        args.push(match[1] ? match[1] : match[0]); 
+                    }
+                    if (match[0] === '--ignore-certificate-errors' || match[0] === '--start-fullscreen') {
+                        browserArg += ' ' + match[0];
+                    }
+                }
             } while (match !== null);
         }
+    
+        // Enclose browserArg in quotes if it includes flags
+        if (browserArg.includes(' ')) {
+            browserArg = `'${browserArg}'`;
+        }
+    
+        args[0] = browserArg; // Update the browser argument with the potentially modified browserArg
 
         if (type !== "file") {
             args.push("--" + type);
